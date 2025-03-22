@@ -5,14 +5,13 @@ A GPT-2 based chatbot that provides restaurant recommendations based on Yelp rev
 ## Project Structure
 
 ```
-restaurant-bot/
+yelp-bot/
 ├── src/
 │   ├── models/
 │   │   └── chatbot.py         # Main chatbot model implementation
 │   └── training/
 │       └── train_baseline.py  # Training script
-├── scripts/
-│   └── download_data.py      # Script to process Yelp data
+│   download_data.py          # Script to process Yelp data
 ├── data/                     # Place Yelp dataset files here
 ├── chat_with_bot.py          # Interactive chat interface
 └── train_in_colab.ipynb      # Google Colab training notebook
@@ -20,27 +19,14 @@ restaurant-bot/
 
 ## Training in Google Colab
 
-1. Open `train_in_colab.ipynb` in Google Colab
-
-2. Upload Project Files:
-   ```
-   src/
-   ├── models/
-   │   └── chatbot.py
-   └── training/
-       └── train_baseline.py
-   download_data.py
-   ```
-   
-3. Download and Upload Yelp Data:
+1. Download and Upload Yelp Data:
    - Download the [Yelp Open Dataset](https://www.yelp.com/dataset)
    - You need both:
      - `yelp_academic_dataset_review.json`
      - `yelp_academic_dataset_business.json`
-   - Create a `data` directory in Colab
-   - Upload both files to the `data` directory
+   - Put it under the data folder within your repository
 
-4. Process the Data:
+2. Process the Data:
    ```python
    !python download_data.py \
      --input_file data/yelp_academic_dataset_review.json \
@@ -51,6 +37,21 @@ restaurant-bot/
    This creates:
    - `data/train.json` (8000 examples)
    - `data/val.json` (1000 examples)
+
+3. Open `train_in_colab.ipynb` in Google Colab
+
+4. Upload Project Files within Google Colab:
+   ```
+   src/
+   ├── models/
+   │   └── chatbot.py
+   └── training/
+       └── train_baseline.py
+   └── chat_with_bot.py
+   data/
+   ├── train.json      
+   └── val.json
+   ```
 
 5. Run Training:
    - Follow the notebook cells in order
