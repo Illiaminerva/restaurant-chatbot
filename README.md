@@ -29,8 +29,7 @@ restaurant-bot/
    │   └── chatbot.py
    └── training/
        └── train_baseline.py
-   scripts/
-   └── download_data.py
+   download_data.py
    ```
    
 3. Download and Upload Yelp Data:
@@ -43,7 +42,7 @@ restaurant-bot/
 
 4. Process the Data:
    ```python
-   !python scripts/download_data.py \
+   !python download_data.py \
      --input_file data/yelp_academic_dataset_review.json \
      --business_file data/yelp_academic_dataset_business.json \
      --output_dir data \
