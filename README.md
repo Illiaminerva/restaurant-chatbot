@@ -11,9 +11,9 @@ yelp-bot/
 │   │   └── chatbot.py         # Main chatbot model implementation
 │   └── training/
 │       └── train_baseline.py  # Training script
-│   download_data.py          # Script to process Yelp data
+│   ├──  chat_with_bot.py          # Interactive chat interface
+├── download_data.py          # Script to process Yelp data
 ├── data/                     # Place Yelp dataset files here
-├── chat_with_bot.py          # Interactive chat interface
 └── train_in_colab.ipynb      # Google Colab training notebook
 ```
 
