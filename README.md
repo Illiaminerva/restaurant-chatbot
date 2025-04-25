@@ -1,92 +1,113 @@
-# Yelp Recommendation Chatbot
+# 🍽️ Yelp Recommendation Chatbot
 
-A GPT-2 based chatbot that provides restaurant recommendations based on Yelp reviews.
+A GPT-2 based conversational assistant that provides restaurant recommendations based on real Yelp reviews. Built with fine-tuning and reinforcement learning, and tracked using MLflow.
 
-## Project Structure
+---
+
+## 🧠 Overview
+
+This project explores how large language models can be adapted for task-specific recommendation using:
+
+- **GPT-2 Fine-Tuning** on structured Yelp data
+- **Reinforcement Learning (Policy Gradient)** for targeted reward optimization
+- **Custom Evaluation Metrics**: Relevance, Completeness, Semantic Similarity
+- **MLflow**: Logging all training metrics and experiments
+
+---
+
+## 🗂️ Repository Structure
 
 ```
-yelp-bot/
+restaurant-chatbot/
 ├── src/
 │   ├── models/
-│   │   └── chatbot.py         # Main chatbot model implementation
-│   └── training/
-│       └── train_baseline.py  # Training script
-│   ├──  chat_with_bot.py          # Interactive chat interface
-├── download_data.py          # Script to process Yelp data
-├── data/                     # Place Yelp dataset files here
-└── train_in_colab.ipynb      # Google Colab training notebook
+│   │   └── chatbot.py             # GPT-2 chatbot class
+│   ├── training/
+│   │   ├── train_baseline.py      # Fine-tuning
+│   │   └── train_rl.py            # Reinforcement learning
+│   └── evaluation/
+│   │   └── evaluate_responses.py  # Custom metrics
+├── data/
+│   ├── train.json
+│   └── val.json
+├── download_data.py              # Yelp preprocessor
+├── train_in_colab.ipynb          # End-to-end training
+└── README.md
 ```
 
-## Training in Google Colab
+---
 
-1. Download and Upload Yelp Data:
-   - Download the [Yelp Open Dataset](https://www.yelp.com/dataset)
-   - You need both:
-     - `yelp_academic_dataset_review.json`
-     - `yelp_academic_dataset_business.json`
-   - Put it under the data folder within your repository
+## 📦 Setup & Preprocessing
 
-2. Process the Data:
-   ```python
-   !python download_data.py \
-     --input_file data/yelp_academic_dataset_review.json \
-     --business_file data/yelp_academic_dataset_business.json \
-     --output_dir data \
-     --max_reviews 10000
-   ```
-   This creates:
-   - `data/train.json` (8000 examples)
-   - `data/val.json` (1000 examples)
+### 1. Get Yelp Data
+
+Download from [Yelp Dataset](https://www.yelp.com/dataset)
+
+- `yelp_academic_dataset_review.json`
+- `yelp_academic_dataset_business.json`
+
+### 2. Process Data
+
+```bash
+python download_data.py \
+  --input_file data/yelp_academic_dataset_review.json \
+  --business_file data/yelp_academic_dataset_business.json \
+  --output_dir data \
+  --max_reviews 10000
+```
+
+Generates:
+
+- `data/train.json`
+- `data/val.json`
 
 3. Open `train_in_colab.ipynb` in Google Colab
 
 4. Upload Project Files within Google Colab:
    ```
-   src/
-   ├── models/
-   │   └── chatbot.py
-   └── training/
-       └── train_baseline.py
-   └── chat_with_bot.py
-   data/
-   ├── train.json      
-   └── val.json
+   restaurant-chatbot/
+   ├── src/
+   │   ├── models/
+   │   │   └── chatbot.py
+   │   ├── training/
+   │   │   ├── train_baseline.py
+   │   │   └── train_rl.py
+   │   └── evaluation/
+   │       └── evaluate_responses.py
+   └── data/
+       ├── train.json
+       └── val.json
    ```
 
 5. Run Training:
    - Follow the notebook cells in order
-   - The model will be saved as `models/baseline/best_model.pt`
-   - Download this file after training completes
+   - The models will be saved under `models/` folder
+   - Download the files after training completes
 
-## Model Features
-- Restaurant-specific recommendations
-- Sentiment analysis for responses
-- Emoji feedback based on sentiment (to be improved)
+---
 
-## Initial Results and Analysis
+## 🧪 Experiments Summary
 
-### Training Performance
-Our initial training shows promising results with consistent improvement across 8 epochs:
-   - Training loss improved from 2.86 to 1.95
-   - Validation loss improved from 2.33 to 2.14
-   - Model consistently saved better checkpoints throughout training
+| Model Variant | Semantic | Relevance | Complete | Overall |
+|---------------|----------|-----------|----------|---------|
+| Vanilla GPT-2 | 0.474    | 0.467     | 0.300    | 0.560   |
+| Fine-Tuned    | 0.596    | 0.667     | 0.650    | 0.728   |
+| RL-Default    | 0.638    | 0.733     | 0.600    | 0.743   |
 
-### Current Challenges
-   - Location mismatches (e.g., recommending Santa Barbara restaurants for San Francisco queries)
-   - Sometimes includes irrelevant review details
-   - Responses contain redundant information
+---
 
-## Next Steps and Improvements
+## 📦 Deployment (Separate Repo)
 
-### 1. Reinforcement Learning Integration
-Planning to implement:
-- Location accuracy rewards
-- Response relevance scoring
-- Conciseness rewards
-- User satisfaction metrics
+This repo focuses on model development and training.
 
-### 2. Response Quality Enhancement
-- Better filtering of review content
-- Location-based scoring system
-- Improved context understanding
-- More focused response generation
+➡️ Deployment via Flask + Docker + Google Cloud is included in [deployed-restaurant-bot](https://github.com/Illiaminerva/deployed-restaurant-bot)
+
+---
+
+## ✅ Dependencies
+
+- Python 3.11+
+- torch, transformers, mlflow
+- sentence-transformers
+- Flask (for deployment)
+
