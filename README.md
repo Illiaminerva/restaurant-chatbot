@@ -39,7 +39,7 @@ restaurant-chatbot/
 
 ### 1. Get Yelp Data
 
-Download from [Yelp Dataset](https://www.yelp.com/dataset)
+Download from [Yelp Dataset](https://www.yelp.com/dataset), put both under `data` folder.
 
 - `yelp_academic_dataset_review.json`
 - `yelp_academic_dataset_business.json`
