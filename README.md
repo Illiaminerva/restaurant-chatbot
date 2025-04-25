@@ -27,9 +27,6 @@ restaurant-chatbot/
 │   │   └── train_rl.py            # Reinforcement learning
 │   └── evaluation/
 │   │   └── evaluate_responses.py  # Custom metrics
-├── data/
-│   ├── train.json
-│   └── val.json
 ├── download_data.py              # Yelp preprocessor
 ├── train_in_colab.ipynb          # End-to-end training
 └── README.md
