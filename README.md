@@ -29,7 +29,7 @@ restaurant-chatbot/
 │       └── evaluate_responses.py  # Custom metrics
 │   └── scripts/
 │       └── download_data.py      # Yelp preprocessor
-├── train_in_colab.ipynb          # End-to-end training
+├── colab_training.ipynb          # End-to-end training
 └── README.md
 ```
 
@@ -59,7 +59,7 @@ Generates:
 - `data/train.json`
 - `data/val.json`
 
-3. Open `train_in_colab.ipynb` in Google Colab
+3. Open `colab_training.ipynb` in Google Colab
 
 4. Upload Project Files within Google Colab:
    ```
